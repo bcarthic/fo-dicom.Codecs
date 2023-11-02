@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Runtime.InteropServices;
 
 using FellowOakDicom.Imaging.Codec;
@@ -553,7 +552,6 @@ namespace FellowOakDicom.Imaging.NativeCodec
                     jparams = (DicomJpeg2000Params)GetDefaultParameters();
 
                 int pixelCount = oldPixelData.Height * oldPixelData.Width;
-                var pool = ArrayPool<byte>.Shared;
 
                 for (int frame = 0; frame < oldPixelData.NumberOfFrames; frame++)
                 {
@@ -754,7 +752,7 @@ namespace FellowOakDicom.Imaging.NativeCodec
                             if (Convert.ToBoolean(Opj_encode(cinfo, cio, image, eparams.index)))
                             {
                                 int clen = Cio_tell(cio);
-                                byte[] cbuf = pool.Rent(clen);
+                                byte[] cbuf = new byte[clen];
 
                                 Marshal.Copy((IntPtr)cio->buffer, cbuf, 0, clen);
 
