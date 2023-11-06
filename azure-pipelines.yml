@@ -214,6 +214,7 @@ stages:
         feedsToUse: 'select'
         packagesToPack: '**/fo-dicom.Codecs.nuspec'
         versioningScheme: 'off'
+        packDestination: '$(Build.ArtifactStagingDirectory)/nuget'
     - task: NuGetCommand@2
       inputs:
         command: 'push'
