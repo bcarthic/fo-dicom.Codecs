@@ -37,7 +37,6 @@ stages:
         feedsToUse: 'select'
         versioningScheme: 'off'
   - job: linux_x64
-    dependsOn: win_x64
     pool:
       vmImage: 'ubuntu-20.04'
     steps:
@@ -79,7 +78,6 @@ stages:
         feedsToUse: 'select'
         versioningScheme: 'off'
   - job: osx_x64
-    dependsOn: linux_x64
     pool:
       vmImage: 'macos-11'
     steps:
@@ -125,7 +123,6 @@ stages:
         feedsToUse: 'select'
         versioningScheme: 'off'
   - job: osx_arm64
-    dependsOn: osx_x64
     pool:
       vmImage: 'macos-11'
     steps:
