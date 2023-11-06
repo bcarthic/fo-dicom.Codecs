@@ -214,7 +214,13 @@ stages:
         feedsToUse: 'select'
         packagesToPack: '**/fo-dicom.Codecs.nuspec'
         versioningScheme: 'off'
-        packDestination: '$(Build.ArtifactStagingDirectory)'
+        packDestination: '$(Build.ArtifactStagingDirectory)/nupkgs'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish NuGet packages'
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/nupkgs'
+        artifactName: 'nuget'
+        publishLocation: 'Container'
     - task: NuGetCommand@2
       inputs:
         command: 'push'
